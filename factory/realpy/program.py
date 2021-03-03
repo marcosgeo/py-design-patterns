@@ -11,19 +11,19 @@ config = {
 }
 
 def run():
-    pandora = music.factory.create("PANDORA", **config)
+    pandora = music.services.get("PANDORA", **config)
     pandora.test_connection()
 
-    spotify = music.factory.create("SPOTIFY", **config)
+    spotify = music.services.get("SPOTIFY", **config)
     spotify.test_connection()
 
-    local = music.factory.create("LOCAL", **config)
+    local = music.services.get("LOCAL", **config)
     local.test_connection()
 
-    pandora2 = music.factory.create("PANDORA", **config)
+    pandora2 = music.services.get("PANDORA", **config)
     print(f"id(pandora) == id(pandora2): {id(pandora) == id(pandora2)}")
 
-    spotify2 = music.factory.create("SPOTIFY", **config)
+    spotify2 = music.services.get("SPOTIFY", **config)
     print(f"if(spotify) == id(spotify2): {id(spotify) == id(spotify)}")
 
 

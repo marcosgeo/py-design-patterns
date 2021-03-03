@@ -57,11 +57,17 @@ class LocalService:
         print(f"Accessing Local Musict at {self._location}")
 
 
+class MusicServiceProvider(ObjectFactory):
+    def get(self, service_id, **kwargs):
+        return self.create(service_id, **kwargs)
+
+
 def create_local_music_service(local_music_location, **_ignored):
     return LocalService(local_music_location)
 
-factory = ObjectFactory()
-factory.register_builder("SPOTIFY", SpotifyServiceBuilder())
-factory.register_builder("PANDORA", PandoraServiceBuilder())
-factory.register_builder("LOCAL", create_local_music_service)
+
+services = MusicServiceProvider()
+services.register_builder("SPOTIFY", SpotifyServiceBuilder())
+services.register_builder("PANDORA", PandoraServiceBuilder())
+services.register_builder("LOCAL", create_local_music_service)
 
